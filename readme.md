@@ -6,5 +6,7 @@ So, How do I use this resource? I would suggest draging and dropping these files
 
 **FUNCTIONS (CLIENT)**
 `SCRIPT.SET(PlayerId, WorldID)`: Sets the playerId (client-id) you get it with `PlayerId()` for your own player and then any number for worldID.
+
 `SCRIPT.GET(player)`: Gets the current worldID for the requested player.
+
 `SCRIPT.CLEAR(player)`: Clears aka resets the worldID back to default.
