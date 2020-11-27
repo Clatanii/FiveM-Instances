@@ -39,7 +39,8 @@ end
 -- MAIN LOOP
 CreateThread(function()
 	TriggerServerEvent('WOSA:INSTANCES:GET_ALL')
-	SCRIPT.SET(PlayerId(), GetPlayerServerId(PlayerId()))
+	Wait(500)
+	SCRIPT.SET(PlayerId(), 0)
 
 	while true do Wait(500)
 		for _, player in ipairs(GetActivePlayers()) do
