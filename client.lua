@@ -1,5 +1,5 @@
 -- VARIABLES & TABLES
-local SCRIPT = {}
+local INSTANCE = {}
 local synced_table = {}
 
 -- EVENTS
@@ -16,16 +16,16 @@ AddEventHandler('WOSA:INSTANCES:GET_ALL', function(data)
 end)
 
 -- FUNCTIONS FOR PED
-function SCRIPT.GET(player)
+function INSTANCE.GET(player)
 	return synced_table[player] or 0
 end
 
-function SCRIPT.SET(player, ID)
+function INSTANCE.SET(player, ID)
 	synced_table[player] = ID
 	TriggerServerEvent('WOSA:INSTANCES:UPDATE', player, synced_table[player])
 end
 
-function SCRIPT.CLEAR(player)
+function INSTANCE.CLEAR(player)
 	synced_table[player] = 0
 	TriggerServerEvent('WOSA:INSTANCES:UPDATE', player, 0)
 
@@ -40,12 +40,12 @@ end
 CreateThread(function()
 	TriggerServerEvent('WOSA:INSTANCES:GET_ALL')
 	Wait(500)
-	SCRIPT.SET(PlayerId(), 0)
+	INSTANCE.SET(PlayerId(), 0)
 
 	while true do Wait(500)
 		for _, player in ipairs(GetActivePlayers()) do
 			if player ~= PlayerId() then
-				if SCRIPT.GET(player) ~= SCRIPT.GET(PlayerId()) then
+				if INSTANCE.GET(player) ~= INSTANCE.GET(PlayerId()) then
 					NetworkConcealPlayer(player, true)
 				else
 					if NetworkIsPlayerConcealed(player) then
